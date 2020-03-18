@@ -1,0 +1,28 @@
+Package: rPacificCod
+Type: Package
+Title: Functions related to the Pacific cod IBM
+Version: 2020.03.17
+Date: 2020-03-17
+Author: Wiliam T. Stockhausen
+Maintainer: Wiliam T. Stockhausen <wiliam.stockhausen@noaa.gov>
+Description: Functions related to the Pacific cod IBM.
+License: LICENSE
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.0.2
+Depends: R (>= 3.5.0)
+Imports:
+  ggplot2,
+  gridExtra,
+  lwgeom,
+  ncdf4,
+  rDisMELS,
+  reshape2,
+  sf,
+  wtsGIS,
+  wtsROMS,
+  wtsUtilities,
+  tmap,
+  tmaptools,
+  viridis,
+  utils
