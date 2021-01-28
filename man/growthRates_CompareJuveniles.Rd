@@ -4,7 +4,7 @@
 \alias{growthRates_CompareJuveniles}
 \title{Compare growth rates as functions of temperature for benthic juveniles}
 \usage{
-growthRates_CompareJuveniles(T)
+growthRates_CompareJuveniles(T, W = 6.8, EDc = 4138)
 }
 \arguments{
 \item{T}{- temperature (deg C)}

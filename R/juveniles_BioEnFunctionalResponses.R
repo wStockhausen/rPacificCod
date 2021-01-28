@@ -47,9 +47,9 @@ juv_fR<-function(t,
 #' @export
 #'
 juv_fC<-function(t,
-                     a=-0.0076,
-                     b=0.1859,
-                     c=-0.1424){
+                   a=-0.0076,
+                   b=0.1859,
+                   c=-0.1424){
   val<-a*t^2+b*t+c;
   return(val);
 }

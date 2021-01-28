@@ -30,6 +30,6 @@ juveniles_GrowthRate_TL<-function(T){
 #' @export
 #'
 juveniles_GrowthRate_WW<-function(T){
-  gM <- (-0.998 + 0.579*T - 0.022*T^2)/100;#--Hurst et al 2010, juvenile eq, per day
+  gM <- (-0.998 + 0.579*T - 0.022*T^2)/100;#--Hurst et al 2010, juvenile eq, growth per day wet weight
   return(gM);
 }

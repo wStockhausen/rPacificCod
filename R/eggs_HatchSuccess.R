@@ -1,7 +1,7 @@
 #'
-#' @title Calculate the hatch success of Pacific cod eggs by temtperature
+#' @title Calculate the hatch success of Pacific cod eggs by temperature
 #'
-#' @description Function to calculate the hatch success of Pacific cod eggs by temtperature.
+#' @description Function to calculate the hatch success of Pacific cod eggs by temperature.
 #'
 #' @param T - temperature (deg C)
 #'

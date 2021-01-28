@@ -2,7 +2,7 @@
 % Please edit documentation in R/juveniles_BioEnGrowth.R
 \name{juv_BioEnGrowth}
 \alias{juv_BioEnGrowth}
-\title{Calculate growth (\% wet mass per day) by weight and temperature}
+\title{Calculate growth (J/g fish/d) by weight and temperature}
 \usage{
 juv_BioEnGrowth(W, T, DSa = 0.125, Fa = 0.15, Ua = 0.11, EDp = 4113)
 }
@@ -25,33 +25,27 @@ G (growth rate), C (consumption rate), R (total respiration rate), F (egestion r
 U (excretion rate), Ra (non-SDA repsiration rate), and SDA (specific dynamic action rate).
 }
 \description{
-Function to calculate growth (\% wet mass per day) by weight and temperature.
+Function to calculate growth (J/g fish/d) by weight and temperature.
 }
 \details{
 Based on eq.s S1, S2, and S3 in Supplement to Hurst et al. 2018 as corrected by
 those in Cianelli et al, 1998:
 \itemize{
-\item{\eqn{G(W,T)   = C(W,T) - [R(W,T) + F(W,T) + U(W,T)] }, growth []}
-\item{\eqn{C(W,T)   = C(W,EDp)*fC(T) }, consumption []}
-\item{\eqn{R(W,T)   = Ra(W,T) + SDA(W,T) }, total respiration []}
+\item{\eqn{G(W,T)   = C(W,T) - [R(W,T) + F(W,T) + U(W,T)] }, growth [J/g fish/d]}
+\item{\eqn{C(W,T)   = C(W,EDp)*fC(T) }, consumption [J/g fish/d]}
+\item{\eqn{R(W,T)   = Ra(W,T) + SDA(W,T) }, total respiration [J/g fish/d]}
 \item{\eqn{Ra(W,T)  = R(W)*fR(T) }, non-SDA respiration}
-\item{\eqn{F(W,T)   = Fa*C }, egestion []}
-\item{\eqn{U(W,T)   = Ua*(C-F) }, excretion []}
-\item{\eqn{SDA = DSa*(C-F) }, specific dynamic action []}
+\item{\eqn{F(W,T)   = Fa*C }, egestion [J/g fish/d]}
+\item{\eqn{U(W,T)   = Ua*(C-F) }, excretion [J/g fish/d]}
+\item{\eqn{SDA = DSa*(C-F) }, specific dynamic action [J/g fish/d]}
 }
 }
-\section{TODO}{
-
-There are clearly some issues with these equations, probably in terms
-of units.
-}
-
 \seealso{
 Other juvenile bioenergetic functions: 
 \code{\link{juvBioenergetics_CompareRelationships}()},
 \code{\link{juvBioenergetics_PlotRelationships}()},
 \code{\link{juv_CT}()},
-\code{\link{juv_C}()},
+\code{\link{juv_Ca}()},
 \code{\link{juv_GT}()},
 \code{\link{juv_MT}()},
 \code{\link{juv_Ra}()},

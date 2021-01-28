@@ -1,7 +1,7 @@
 #'
-#' @title Calculate growth (\% wet mass per day) by weight and temperature
+#' @title Calculate growth (J/g fish/d) by weight and temperature
 #'
-#' @description Function to calculate growth (\% wet mass per day) by weight and temperature.
+#' @description Function to calculate growth (J/g fish/d) by weight and temperature.
 #'
 #' @param W - weight(s) of individual fish
 #' @param T - temperature(s)
@@ -17,18 +17,14 @@
 #' @details Based on eq.s S1, S2, and S3 in Supplement to Hurst et al. 2018 as corrected by
 #' those in Cianelli et al, 1998:
 #' \itemize{
-#' \item{\eqn{G(W,T)   = C(W,T) - [R(W,T) + F(W,T) + U(W,T)] }, growth []}
-#' \item{\eqn{C(W,T)   = C(W,EDp)*fC(T) }, consumption []}
-#' \item{\eqn{R(W,T)   = Ra(W,T) + SDA(W,T) }, total respiration []}
+#' \item{\eqn{G(W,T)   = C(W,T) - [R(W,T) + F(W,T) + U(W,T)] }, growth [J/g fish/d]}
+#' \item{\eqn{C(W,T)   = C(W,EDp)*fC(T) }, consumption [J/g fish/d]}
+#' \item{\eqn{R(W,T)   = Ra(W,T) + SDA(W,T) }, total respiration [J/g fish/d]}
 #' \item{\eqn{Ra(W,T)  = R(W)*fR(T) }, non-SDA respiration}
-#' \item{\eqn{F(W,T)   = Fa*C }, egestion []}
-#' \item{\eqn{U(W,T)   = Ua*(C-F) }, excretion []}
-#' \item{\eqn{SDA = DSa*(C-F) }, specific dynamic action []}
+#' \item{\eqn{F(W,T)   = Fa*C }, egestion [J/g fish/d]}
+#' \item{\eqn{U(W,T)   = Ua*(C-F) }, excretion [J/g fish/d]}
+#' \item{\eqn{SDA = DSa*(C-F) }, specific dynamic action [J/g fish/d]}
 #'}
-#'
-#' @section TODO:
-#' There are clearly some issues with these equations, probably in terms
-#' of units.
 #'
 #' @family juvenile bioenergetic functions
 #'
@@ -43,13 +39,13 @@ juv_BioEnGrowth<-function(W,
   dfr<-NULL;
   for (w in W){
     for (t in T){
-      c  <- juv_C(w,EDp)*juv_fC(t);  #in J/g fish/d
-      Rp <- juv_Ra(w)*juv_fR(t);     #in J/g fish/d
-      f  <-Fa*c;                             #in J/g fish/d
-      u  <-Ua*(c-f);                         #in J/g fish/d
-      sda<-DSa*(c-f);                        #in J/g fish/d
-      #r<-Rp+sda;
-      r <- Rp;
+      c  <- rPacificCod::juv_Ca(w,EDp=EDp)*rPacificCod::juv_fC(t);  #in J/g fish/d
+      Rp <- rPacificCod::juv_Ra(w)        *rPacificCod::juv_fR(t);  #in J/g fish/d
+      f  <-Fa*c;                      #in J/g fish/d
+      u  <-Ua*(c-f);                  #in J/g fish/d
+      sda<-DSa*(c-f);                 #in J/g fish/d
+      #r<-Rp;
+      r <- Rp+sda;
       g <- c-(r+f+u); #in J/g fish/d
       dfrp<-data.frame("W"=w,"T"=t,"G"=g,"C"=c,"R"=r,"F"=f,"U"=u,"Rp"=Rp,"SDA"=sda);
       dfr<-rbind(dfr,dfrp);

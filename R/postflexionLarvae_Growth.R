@@ -91,30 +91,26 @@ postflexionLarvae_GrowthRate_WW<-function(T){
 #'
 #' @export
 #'
-postflexionLarvae_MapGrowthRate_WW<-function(roms_grid=-wtsROMS::getGrid("CGOA"),
-                                             sf_mo="~/Projects/ROMS/CGOA/cgoa_avg_0005.nc",
+postflexionLarvae_MapGrowthRate_WW<-function(roms_grid=wtsROMS::getGrid("CGOA"),
+                                             sf_mo="~/Work/Projects/ROMS/CGOA/cgoa_avg_0005.nc",
                                              timeslice=1,
                                              vertical_layer=1,
                                              basemap=NULL){
 
-  cgoa<-wtsROMS::getGrid("CGOA");
-  cgoa<-lwgeom::st_transform_proj(cgoa,3338);#Alaska Albers
-  idx<-is.na(cgoa$Z);
+  roms_grid<-sf::st_transform(roms_grid,3338);#Alaska Albers
+  idx<-is.na(roms_grid$Z);
   if (is.character(sf_mo)){
-    sf_mo<-wtsROMS::netCDF_CreateModelOutput(sf_mo,cgoa,"temp",timeslice,vertical_layer);
+    sf_mo<-wtsROMS::netCDF_Extract4DVarAsSF(sf_mo,roms_grid,"temp",timeslice,vertical_layer);
     g<-postflexionLarvae_GrowthRate_WW(sf_mo$temp);
     sf_mo["growth rate (1/day)"]<-g;
     sf_mo<-sf_mo[!idx,];
   }
   if (is.null(basemap)){
     bbox   <-wtsROMS::getStandardBoundingBox("CGOA shelf");
-    basemap<-wtsROMS::createBasemap(boundingbox=bbox);
+    basemap<-wtsROMS::tmap_CreateBasemap(bbox=bbox);
   }
 
-  map    <-wtsROMS::mapLayer_Plot(sf_mo,col="growth rate (1/day)",basemap=basemap,showMap=FALSE);
-  png(filename="PostflexionLarvae_GrowthRateWW.png",width=800,height=500);
-    print(map);
-  dev.off();
+  map    <-wtsROMS::tmap_CreateMap(sf_mo,col="growth rate (1/day)",basemap=basemap);
   return(map);
 }
 

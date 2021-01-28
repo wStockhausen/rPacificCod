@@ -67,6 +67,6 @@ ysl_GrowthRate_SL<-function(T){
 #' @export
 #'
 ysl_GrowthRate_DW<-function(T){
-  gM <- 2.990 + 0.772*T - 0.077*T^2;#--Hurst et al 2010, preflexion eq, per day
+  gM <- 2.990 + 0.772*T - 0.077*T^2;#--Hurst et al 2010, same as preflexion eq, per day
   return(gM);
 }

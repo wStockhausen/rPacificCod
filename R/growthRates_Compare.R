@@ -80,14 +80,18 @@ growthRates_CompareAllStages<-function(T){
 #'
 #' @export
 #'
-growthRates_CompareJuveniles<-function(T){
-  #--growth in mass form 2010 paper
-  gM_juv2010<-rPacificCod::juveniles_GrowthRate_WW(T);
+growthRates_CompareJuveniles<-function(T,W=6.8,EDc=4138){
+  #--growth in mass from 2010 paper
+  gM_juv2010<-rPacificCod::juveniles_GrowthRate_WW(T);#relative growth (i.e., per-day)
   #--growth in mass from 2018 paper
-  gM_juv2018<-rPacificCod::juv_GT(T)/6.8;#need to convert to relative growth
+  gM_juv2018<-rPacificCod::juv_GT(T)/EDc;             #need to convert from J/g fish/day to relative growth
+  #--bioenergetically-determined growth rate from 2018 paper
+  dfr<-rPacificCod::juv_BioEnGrowth(W,T);
+  gM_juvBioE<-dfr$G/EDc;                              #need to convert from J/g fish/day to relative growth
   dfr<-data.frame(temp=T,
-                  "2010"  =gM_juv2010,
-                  "2018"  =gM_juv2018,
+                  "2010 fit"  =gM_juv2010,
+                  "2018 fit"  =gM_juv2018,
+                  "BioE prd"  =gM_juvBioE,
                   check.names=FALSE);
   dfrp<-reshape2::melt(dfr,id.vars="temp")
   p <- ggplot(dfrp,mapping=aes_string(x="temp",y="value",colour="variable"));

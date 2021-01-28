@@ -2,7 +2,7 @@
 % Please edit documentation in R/eggs_HatchSuccess.R
 \name{eggs_CalcHatchSuccess}
 \alias{eggs_CalcHatchSuccess}
-\title{Calculate the hatch success of Pacific cod eggs by temtperature}
+\title{Calculate the hatch success of Pacific cod eggs by temperature}
 \usage{
 eggs_CalcHatchSuccess(T)
 }
@@ -13,7 +13,7 @@ eggs_CalcHatchSuccess(T)
 value
 }
 \description{
-Function to calculate the hatch success of Pacific cod eggs by temtperature.
+Function to calculate the hatch success of Pacific cod eggs by temperature.
 }
 \details{
 Based on Laurel and Rogers (2020)

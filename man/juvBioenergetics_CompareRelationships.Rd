@@ -28,7 +28,7 @@ Other juvenile bioenergetic functions:
 \code{\link{juvBioenergetics_PlotRelationships}()},
 \code{\link{juv_BioEnGrowth}()},
 \code{\link{juv_CT}()},
-\code{\link{juv_C}()},
+\code{\link{juv_Ca}()},
 \code{\link{juv_GT}()},
 \code{\link{juv_MT}()},
 \code{\link{juv_Ra}()},

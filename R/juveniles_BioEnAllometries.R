@@ -46,18 +46,18 @@ juv_Ra<-function(w,
 #' @details Based on allometric part of eq. S3 and values in Table 1
 #' in the Supplement to Hurst et al. 2018:\cr
 #' \eqn{  Cg = P * AC * w^BC }   [g prey/g fish/d]
-#' \eqn{  Cj = Cg * EDp}         [   J/gfish/d]
+#' \eqn{  Cj = Cg * EDp}         [   J/g fish/d]
 #'
 #'
 #' @family juvenile bioenergetic functions
 #'
 #' @export
 #'
-juv_C<-function(w,
-                    P=1.0,
-                    AC=0.063,
-                    BC=-0.070,
-                    EDp=4113){
+juv_Ca<-function(w,
+                 P=1.0,
+                 AC=0.063,
+                 BC=-0.070,
+                 EDp=4113){
   c <- P*(AC*w^BC); #--in g prey/g fish/d
   c <- c * EDp;     #--in      J/g fish/d
   return(c);

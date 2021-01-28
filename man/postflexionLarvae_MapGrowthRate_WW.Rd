@@ -5,8 +5,8 @@
 \title{Map growth rates (1/day wet weight) for postflexion larvae}
 \usage{
 postflexionLarvae_MapGrowthRate_WW(
-  roms_grid = -wtsROMS::getGrid("CGOA"),
-  sf_mo = "~/Projects/ROMS/CGOA/cgoa_avg_0005.nc",
+  roms_grid = wtsROMS::getGrid("CGOA"),
+  sf_mo = "~/Work/Projects/ROMS/CGOA/cgoa_avg_0005.nc",
   timeslice = 1,
   vertical_layer = 1,
   basemap = NULL
