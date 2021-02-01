@@ -37,7 +37,7 @@ getLifeStageInfo.PCod<-function(resType='NEW2.0SC'){
     EggClassInfo  <-rbind(dfrStdAtts,as.data.frame(EggClassInfo,stringsAsFactors=FALSE));
 
     YSLClassInfo<-rbind(data.frame(short_name="attached",  data_type="character",name="attached?",                     stringsAsFactors=FALSE),
-                        data.frame(short_name="length",    data_type="numeric",  name="development stage",             stringsAsFactors=FALSE),
+                        data.frame(short_name="length",    data_type="numeric",  name="length",                        stringsAsFactors=FALSE),
                         data.frame(short_name="temp",      data_type="numeric",  name="temperature deg C",             stringsAsFactors=FALSE),
                         data.frame(short_name="sal",       data_type="numeric",  name="salinity",                      stringsAsFactors=FALSE),
                         data.frame(short_name="rho",       data_type="numeric",  name="in situ density",               stringsAsFactors=FALSE),
@@ -50,7 +50,7 @@ getLifeStageInfo.PCod<-function(resType='NEW2.0SC'){
     FDLpfClassInfo      <-YSLClassInfo;
 
     EpiJuvClassInfo<-rbind(data.frame(short_name="attached",  data_type="character",name="attached?",                     stringsAsFactors=FALSE),
-                           data.frame(short_name="length",    data_type="numeric",  name="development stage",             stringsAsFactors=FALSE),
+                           data.frame(short_name="length",    data_type="numeric",  name="length",             stringsAsFactors=FALSE),
                            data.frame(short_name="temp",      data_type="numeric",  name="temperature deg C",             stringsAsFactors=FALSE),
                            data.frame(short_name="sal",       data_type="numeric",  name="salinity",                      stringsAsFactors=FALSE),
                            data.frame(short_name="rho",       data_type="numeric",  name="in situ density",               stringsAsFactors=FALSE),

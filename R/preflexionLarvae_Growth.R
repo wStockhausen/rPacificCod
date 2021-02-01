@@ -7,12 +7,12 @@
 #'
 #' @return vector of growth rates
 #'
-#' @details From Hurst et al., 2010. Valid range is 2-11 deg C.
+#' @details Corrected from Hurst et al., 2010. Valid range is 2-11 deg C.
 #'
 #' @export
 #'
 preflexionLarvae_GrowthRate_SL<-function(T){
-  gL <- 0.0179 + (0.015*T) - (0.00001*T^2);#--Hurst et al 2010, preflexion eq, mm per day
+  gL <- 0.0179 + (0.015*T) - (0.0001*T^2);#--Corrected from Hurst et al 2010, preflexion eq, mm/d SL
   return(gL);
 }
 

@@ -44,12 +44,12 @@ ysl_YolkSacAbsorption<-function(T){
 #'
 #' @return vector of growth rates
 #'
-#' @details From Hurst et al., 2010. Valid range is 2-11 deg C.
+#' @details Corrected version from Hurst et al., 2010. Valid range is 2-11 deg C.
 #'
 #' @export
 #'
 ysl_GrowthRate_SL<-function(T){
-  gL <- 0.0179 + (0.015*T) - (0.00001*T^2);#--Hurst et al 2010, preflexion eq, mm per day
+  gL <- 0.0179 + (0.015*T) - (0.0001*T^2);#--Corrected eq. from Hurst et al 2010, for YSL
   return(gL);
 }
 

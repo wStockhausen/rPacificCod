@@ -16,5 +16,5 @@ vector of growth rates
 Function to calculate growth rate (mm/day SL) for preflexion larvae.
 }
 \details{
-From Hurst et al., 2010. Valid range is 2-11 deg C.
+Corrected from Hurst et al., 2010. Valid range is 2-11 deg C.
 }
