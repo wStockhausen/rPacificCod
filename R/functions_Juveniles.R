@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-juveniles_GrowthRate_TL<-function(T){
+juveniles_GrowthRateTL<-function(T){
   gL <- -0.081 + (0.079*T) - (0.003*T^2);#--Hurst et al 2010, juvenile eq, mm per day
   return(gL);
 }
@@ -29,7 +29,7 @@ juveniles_GrowthRate_TL<-function(T){
 #'
 #' @export
 #'
-juveniles_GrowthRate_WW<-function(T){
-  gM <- (-0.998 + 0.579*T - 0.022*T^2)/100;#--Hurst et al 2010, juvenile eq, growth per day wet weight
+juveniles_GrowthRateWW<-function(T){
+  gM <- (-0.998 + 0.579*T - 0.022*T^2)/100;#--Hurst et al 2010, juvenile eq, growth per day wet weight (orig. eq. in %/d)
   return(gM);
 }

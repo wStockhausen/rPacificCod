@@ -30,10 +30,10 @@
 #'
 gg_MapGrowthRate<-function(sf_dfr=NULL,
                              rate_col="growth_rate",
-                             label="growth rate (1/day)",
+                             label="growth rate WW (1/day)",
                              scale_fill=ggplot2::scale_fill_viridis_c(option='A'),
                              basemap=NULL,
-                             rateFcn=postflexionLarvae_GrowthRate_WW,
+                             rateFcn=postflexionLarvae_GrowthRateWW,
                              roms_grid=wtsROMS::getGrid("CGOA"),
                              roms_mo="~/Work/Projects/ROMS/CGOA/cgoa_avg_0005.nc",
                              timeslice=1,

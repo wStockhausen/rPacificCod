@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-preflexionLarvae_GrowthRate_SL<-function(T){
+preflexionLarvae_GrowthRateSL<-function(T){
   gL <- 0.0179 + (0.015*T) - (0.0001*T^2);#--Corrected from Hurst et al 2010, preflexion eq, mm/d SL
   return(gL);
 }
@@ -29,7 +29,7 @@ preflexionLarvae_GrowthRate_SL<-function(T){
 #'
 #' @export
 #'
-preflexionLarvae_GrowthRate_DW<-function(T){
+preflexionLarvae_GrowthRateDW<-function(T){
   gM <- (2.990 + 0.772*T - 0.077*T^2)/100;#--Hurst et al 2010, preflexion eq, per day
   return(gM);
 }
