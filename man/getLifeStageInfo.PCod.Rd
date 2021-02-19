@@ -10,11 +10,16 @@ getLifeStageInfo.PCod(resType = "NEW2.0SC")
 \item{resType}{- results file type (i.e., 'NEW2.0SC')}
 }
 \value{
-a list
+a list with elements
+\itemize{
+ \item{resType - resType used to get standard attributes}
+ \item{classInfo - list by class name, with each element a list with elements 'info' (a tibble) and 'typeNames' (a character vector)}
+ \item{lifeStageTypes - tibble with columns typeName, class, and name}
+}
 }
 \description{
 Function to get a list that defines life stage info for the DisMELS Pacific cod IBM.
 }
 \details{
-Uses \code{rDisMELS::getStandardAttributes}.
+Uses \code{rDisMELS::getStandardAttributes}.resType is passed on to this function.
 }

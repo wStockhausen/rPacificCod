@@ -4,9 +4,17 @@
 #'@description Function to get a list that defines life stage info for the DisMELS Pacific cod IBM.
 #'
 #'@param resType - results file type (i.e., 'NEW2.0SC')
-#'@return a list
 #'
-#'@details Uses \code{rDisMELS::getStandardAttributes}.
+#'@return a list with elements
+#'\itemize{
+#'  \item{resType - resType used to get standard attributes}
+#'  \item{classInfo - list by class name, with each element a list with elements 'info' (a tibble) and 'typeNames' (a character vector)}
+#'  \item{lifeStageTypes - tibble with columns typeName, class, and name}
+#'}
+#'
+#'@details Uses \code{rDisMELS::getStandardAttributes}.resType is passed on to this function.
+#'
+#'@import tibble
 #'
 #'@export
 #'
@@ -24,41 +32,71 @@ getLifeStageInfo.PCod<-function(resType='NEW2.0SC'){
                   'sh.pcod.BenthicJuvStage.BenthicJuvStage');
 
     #information on 'additional attributes' for each life stage class
-    EggClassInfo<-rbind(data.frame(short_name="attached",  data_type="character",name="attached?",                   stringsAsFactors=FALSE),
-                        data.frame(short_name="devStage",  data_type="numeric",name="development stage",             stringsAsFactors=FALSE),
-                        data.frame(short_name="diam",      data_type="cnumeric",name="egg diameter",                 stringsAsFactors=FALSE),
-                        data.frame(short_name="density",   data_type="numeric",name="egg density",                   stringsAsFactors=FALSE),
-                        data.frame(short_name="temp",      data_type="numeric",name="temperature deg C",             stringsAsFactors=FALSE),
-                        data.frame(short_name="copepod",   data_type="numeric",name="Small copepods mg/m^3 dry wt C",stringsAsFactors=FALSE),
-                        data.frame(short_name="euphausiid",data_type="character",name="Euphausiids mg/m^3 dry wt C", stringsAsFactors=FALSE),
-                        data.frame(short_name="neocalanus",data_type="numeric",name="Neocalanoids mg/m^3 dry wt",    stringsAsFactors=FALSE),
-                        data.frame(short_name="sal",       data_type="numeric",name="salinity",                      stringsAsFactors=FALSE),
-                        data.frame(short_name="rho",       data_type="numeric",name="in situ density",               stringsAsFactors=FALSE));
-    EggClassInfo  <-rbind(dfrStdAtts,as.data.frame(EggClassInfo,stringsAsFactors=FALSE));
+    EggClassInfo<-rbind(tibble(short_name="attached", data_type="character",name="attached?"),
+                        tibble(short_name="stgProg",  data_type="numeric",  name="egg stage progression"),
+                        tibble(short_name="SL",       data_type="numeric",  name="embryo SL (mm)"),
+                        tibble(short_name="DW",       data_type="numeric",  name="embryo DW (mg)"),
+                        tibble(short_name="grSL",     data_type="numeric",  name="growth rate for SL (mm/d)"),
+                        tibble(short_name="grDW",     data_type="numeric",  name="growth rate for DW (1/d)"),
+                        tibble(short_name="density",  data_type="numeric",  name="egg density"),
+                        tibble(short_name="temp",     data_type="numeric",  name="temperature deg C"),
+                        tibble(short_name="sal",      data_type="numeric",  name="salinity"),
+                        tibble(short_name="rho",      data_type="numeric",  name="in situ density")
+                        );
+    EggClassInfo<-rbind(dfrStdAtts,EggClassInfo);
 
-    YSLClassInfo<-rbind(data.frame(short_name="attached",  data_type="character",name="attached?",                     stringsAsFactors=FALSE),
-                        data.frame(short_name="length",    data_type="numeric",  name="length",                        stringsAsFactors=FALSE),
-                        data.frame(short_name="temp",      data_type="numeric",  name="temperature deg C",             stringsAsFactors=FALSE),
-                        data.frame(short_name="sal",       data_type="numeric",  name="salinity",                      stringsAsFactors=FALSE),
-                        data.frame(short_name="rho",       data_type="numeric",  name="in situ density",               stringsAsFactors=FALSE),
-                        data.frame(short_name="copepod",   data_type="numeric",  name="Small copepods mg/m^3 dry wt C",stringsAsFactors=FALSE),
-                        data.frame(short_name="euphausiid",data_type="numeric",  name="Euphausiids mg/m^3 dry wt C",   stringsAsFactors=FALSE),
-                        data.frame(short_name="neocalanus",data_type="numeric",  name="Neocalanoids mg/m^3 dry wt",    stringsAsFactors=FALSE));
-    YSLClassInfo  <-rbind(dfrStdAtts,as.data.frame(YSLClassInfo,stringsAsFactors=FALSE));
+    YSLClassInfo<-rbind(tibble(short_name="attached",  data_type="character",name="attached?"),
+                        tibble(short_name="SL",        data_type="numeric",  name="standard length (mm)"),
+                        tibble(short_name="DW",        data_type="numeric",  name="dry weight (mg)"),
+                        tibble(short_name="grSL",      data_type="numeric",  name="growth rate for SL (mm/d)"),
+                        tibble(short_name="grDW",      data_type="numeric",  name="growth rate for DW (1/d)"),
+                        tibble(short_name="temp",      data_type="numeric",  name="temperature deg C"),
+                        tibble(short_name="sal",       data_type="numeric",  name="salinity"),
+                        tibble(short_name="rho",       data_type="numeric",  name="in situ density"),
+                        tibble(short_name="copepod",   data_type="numeric",  name="Small copepods mg/m^3 dry wt C"),
+                        tibble(short_name="euphausiid",data_type="numeric",  name="Euphausiids mg/m^3 dry wt C"),
+                        tibble(short_name="neocalanus",data_type="numeric",  name="Neocalanoids mg/m^3 dry wt"),
+                        tibble(short_name="progYSA",   data_type="numeric",  name="indicator for yolk-sac absorption"),
+                        tibble(short_name="progPNR",   data_type="numeric",  name="indicator for point-of-no return"),
+                        tibble(short_name="prNotFed",  data_type="numeric",  name="probability of not having fed")
+                        );
+    YSLClassInfo<-rbind(dfrStdAtts,YSLClassInfo);
 
-    FDLClassInfo        <-YSLClassInfo;
-    FDLpfClassInfo      <-YSLClassInfo;
+    FDLClassInfo<-rbind(tibble(short_name="attached",  data_type="character",name="attached?"),
+                        tibble(short_name="SL",        data_type="numeric",  name="standard length (mm)"),
+                        tibble(short_name="DW",        data_type="numeric",  name="dry weight (mg)"),
+                        tibble(short_name="grSL",      data_type="numeric",  name="growth rate for SL (mm/d)"),
+                        tibble(short_name="grDW",      data_type="numeric",  name="growth rate for DW (1/d)"),
+                        tibble(short_name="temp",      data_type="numeric",  name="temperature deg C"),
+                        tibble(short_name="sal",       data_type="numeric",  name="salinity"),
+                        tibble(short_name="rho",       data_type="numeric",  name="in situ density"),
+                        tibble(short_name="copepod",   data_type="numeric",  name="Small copepods mg/m^3 dry wt C"),
+                        tibble(short_name="euphausiid",data_type="numeric",  name="Euphausiids mg/m^3 dry wt C"),
+                        tibble(short_name="neocalanus",data_type="numeric",  name="Neocalanoids mg/m^3 dry wt")
+                        );
+    FDLClassInfo<-rbind(dfrStdAtts,FDLClassInfo);
 
-    EpiJuvClassInfo<-rbind(data.frame(short_name="attached",  data_type="character",name="attached?",                     stringsAsFactors=FALSE),
-                           data.frame(short_name="length",    data_type="numeric",  name="length",             stringsAsFactors=FALSE),
-                           data.frame(short_name="temp",      data_type="numeric",  name="temperature deg C",             stringsAsFactors=FALSE),
-                           data.frame(short_name="sal",       data_type="numeric",  name="salinity",                      stringsAsFactors=FALSE),
-                           data.frame(short_name="rho",       data_type="numeric",  name="in situ density",               stringsAsFactors=FALSE),
-                           data.frame(short_name="copepod",   data_type="numeric",  name="Small copepods mg/m^3 dry wt C",stringsAsFactors=FALSE),
-                           data.frame(short_name="euphausiid",data_type="numeric",  name="Euphausiids mg/m^3 dry wt C",   stringsAsFactors=FALSE),
-                           data.frame(short_name="neocalanus",data_type="numeric",  name="Neocalanoids mg/m^3 dry wt",    stringsAsFactors=FALSE),
-                           data.frame(short_name="hsi",       data_type="numeric",  name="Habitat suitability index",     stringsAsFactors=FALSE));
-    EpiJuvClassInfo  <-rbind(dfrStdAtts,as.data.frame(EpiJuvClassInfo,stringsAsFactors=FALSE));
+
+    FDLpfClassInfo<-FDLClassInfo;
+
+    EpiJuvClassInfo<-rbind(tibble(short_name="attached",  data_type="character",name="attached?"),
+                           tibble(short_name="SL",        data_type="cnumeric", name="standard length (mm)"),
+                           tibble(short_name="DW",        data_type="numeric",  name="dry weight (mg)"),
+                           tibble(short_name="grSL",      data_type="cnumeric", name="growth rate for SL (mm/d)"),
+                           tibble(short_name="grDW",      data_type="numeric",  name="growth rate for DW (1/d)"),
+                           tibble(short_name="temp",      data_type="numeric",  name="temperature deg C"),
+                           tibble(short_name="sal",       data_type="numeric",  name="salinity"),
+                           tibble(short_name="rho",       data_type="numeric",  name="in situ density"),
+                           tibble(short_name="copepod",   data_type="numeric",  name="Small copepods mg/m^3 dry wt C"),
+                           tibble(short_name="euphausiid",data_type="numeric",  name="Euphausiids mg/m^3 dry wt C"),
+                           tibble(short_name="neocalanus",data_type="numeric",  name="Neocalanoids mg/m^3 dry wt"),
+                           tibble(short_name="hsi",       data_type="numeric",  name="Habitat suitability index"),
+                           tibble(short_name="TL",        data_type="numeric",  name="total length (mm)"),
+                           tibble(short_name="WW",        data_type="numeric",  name="wet weight (mg)"),
+                           tibble(short_name="grTL",      data_type="numeric",  name="growth rate for TL (mm/d)"),
+                           tibble(short_name="grWW",      data_type="numeric",  name="growth rate for WW (1/d)")
+                           );
+    EpiJuvClassInfo  <-rbind(dfrStdAtts,EpiJuvClassInfo);
 
     BenthicJuvClassInfo <-EpiJuvClassInfo;
 
@@ -72,18 +110,12 @@ getLifeStageInfo.PCod<-function(resType='NEW2.0SC'){
     classInfo[['sh.pcod.BenthicJuvStage.BenthicJuvStage']]<-list(info=BenthicJuvClassInfo,typeNames=c("BenJuv"));
 
     #map of defined life stage type names to class names
-    lifeStageTypes<-rbind(data.frame(typeName="Eggs",      class='sh.pcod.EggStage.EggStage',
-                                     name="benthic egg",   nextType="YSL",              stringsAsFactors=FALSE),
-                          data.frame(typeName="YSL",       class='sh.pcod.YSLStage.YSLStage',
-                                     name="yolksac larva", nextType="FDL",              stringsAsFactors=FALSE),
-                          data.frame(typeName="FDL",                  class='sh.pcod.FDLStage.FDLStage',
-                                     name="feeding preflexion larva", nextType="FDLpf", stringsAsFactors=FALSE),
-                          data.frame(typeName="FDLpf",         class='sh.pcod.FDLpfStage.FDLpfStage',
-                                     name="postflexion larva", nextType="Epijuv",       stringsAsFactors=FALSE),
-                          data.frame(typeName="Epijuv",          class='sh.pcod.EpijuvStage.EpijuvStage',
-                                     name="epipelagic juvenile", nextType="BenthicJuv", stringsAsFactors=FALSE),
-                          data.frame(typeName="BenthicJuv",   class='sh.pcod.BenthicJuvStage.BenthicJuvStage',
-                                     name="benthic juvenile", nextType="",            stringsAsFactors=FALSE));
+    lifeStageTypes<-rbind(tibble(typeName="Eggs",      class='sh.pcod.EggStage.EggStage',              name="benthic egg",              nextType="YSL"),
+                          tibble(typeName="YSL",       class='sh.pcod.YSLStage.YSLStage',              name="yolksac larva",            nextType="FDL"),
+                          tibble(typeName="FDL",       class='sh.pcod.FDLStage.FDLStage',              name="feeding preflexion larva", nextType="FDLpf"),
+                          tibble(typeName="FDLpf",     class='sh.pcod.FDLpfStage.FDLpfStage',          name="postflexion larva",        nextType="Epijuv"),
+                          tibble(typeName="Epijuv",    class='sh.pcod.EpijuvStage.EpijuvStage',        name="epipelagic juvenile",      nextType="BenthicJuv"),
+                          tibble(typeName="BenthicJuv",class='sh.pcod.BenthicJuvStage.BenthicJuvStage',name="benthic juvenile",         nextType=""));
 
     return(invisible(list(resType=resType,classInfo=classInfo,lifeStageTypes=lifeStageTypes)));
 }
