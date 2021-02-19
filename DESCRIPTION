@@ -1,8 +1,8 @@
 Package: rPacificCod
 Type: Package
 Title: Functions related to the Pacific cod IBM
-Version: 2021.02.11
-Date: 2021-02-11
+Version: 2021.02.18
+Date: 2021-02-18
 Author: Wiliam T. Stockhausen
 Maintainer: Wiliam T. Stockhausen <wiliam.stockhausen@noaa.gov>
 Description: Functions related to the Pacific cod IBM.

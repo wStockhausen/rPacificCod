@@ -27,3 +27,7 @@ Function to calculate SL-at-age at a constant temperature.
 Uses \code{\link{integrateGrowthSL}} to calculate a time series of size-at-age given
 temperature-dependent duration and growth functions.
 }
+\examples{
+## tbl2 = calcSLatAgeAtConstantTemp(100,0,5,ysl_YolkSacAbsorption,ysl_GrowthRateSL);
+
+}

@@ -88,3 +88,22 @@ ysl_GrowthRateDW<-function(T){
   gM <- (2.990 + 0.772*T - 0.077*T^2)/100;#--Hurst et al 2010, same as preflexion eq, per day
   return(gM);
 }
+
+#'
+#' @title Calculate dry weight (mg)) corresponding to standard length (mm) for yolk-sac larvae
+#'
+#' @description Function to calculate dry weight (mg)) corresponding to standard length (mm) for yolk-sac larvae.
+#'
+#' @param SL - vector of standard lengths (mm)
+#'
+#' @return vector of dry weights based on regression equation
+#'
+#' @details Based on data from Hurst et al., 2010
+#'
+#' @export
+#'
+ysl_ConvertSLtoDW<-function(sl){
+  ww = 1000*exp(-17.7329551 + 6.7316061*log(sl) - 0.5682575 * log(sl)^2 + (0.09793041^2)/2);
+  return(ww);
+}
+
