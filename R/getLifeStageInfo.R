@@ -18,7 +18,7 @@
 #'
 #'@export
 #'
-getLifeStageInfo.PCod<-function(resType='NEW2.0SC'){
+getLifeStageInfo<-function(resType='NEW2.0SC'){
 
     #get standard attributes dataframe
     dfrStdAtts <- rDisMELS::getStandardAttributes(resType);
