@@ -23,6 +23,14 @@ list of \code{ggplot2}-type plots
 \description{
 Function to plot the bioenergetic relationships for juvenile Pacific cod.
 }
+\details{
+\itemize{
+\item{fitted growth- from \code{\link{juv_GT}}, based on eq. S8}
+\item{fitted respiration -from \code{\link{juv_MT}}, based on eq. S5}
+\item{estimated consumption - from \code{\link{juv_CT}}, based on eq. S9}
+\item{estimated respiration - from \code{\link{juv_Ra}}*\code{\link{juv_fR}}, based on eq.s S2 and S6}
+}
+}
 \seealso{
 Other juvenile bioenergetic functions: 
 \code{\link{juvBioenergetics_PlotRelationships}()},
