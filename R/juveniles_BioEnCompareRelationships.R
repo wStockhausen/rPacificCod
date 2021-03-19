@@ -14,6 +14,8 @@
 #'
 #' @family juvenile bioenergetic functions
 #'
+#' @import magrittr
+#'
 #' @export
 #'
 juvBioenergetics_PlotRelationships<-function(
