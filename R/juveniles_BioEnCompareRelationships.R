@@ -13,6 +13,8 @@
 #'
 #' @family juvenile bioenergetic functions
 #'
+#' @import magrittr
+#'
 #' @export
 #'
 juvBioenergetics_PlotRelationships<-function(
@@ -25,15 +27,17 @@ juvBioenergetics_PlotRelationships<-function(
   dfrp<-reshape2::melt(dfrFRs,id.vars="T",variable.name="response");
   p <- ggplot2::ggplot(data=dfrp,mapping=ggplot2::aes_string(x="T",y="value",colour="response"));
   p <- p + ggplot2::geom_line();
-  p <- p + ggplot2::labs(x="temperature (deg C)",y="functional response");
+  p <- p + ggplot2::labs(x="temperature (deg C)",y="functional response",
+                         subtitle="functional responses");
   #print(p);
   plots[["functional responses"]]<-p;
 
-  dfrRCs<-data.frame(W=W,respiration=juv_Ra(W),consumption=juv_C(W));
+  dfrRCs<-data.frame(W=W,respiration=juv_Ra(W),consumption=juv_Ca(W));
   dfrp<-reshape2::melt(dfrRCs,id.vars="W",variable.name="type");
   p <- ggplot2::ggplot(data=dfrp,mapping=ggplot2::aes_string(x="W",y="value",colour="type"));
   p <- p + ggplot2::geom_line();
-  p <- p + ggplot2::labs(x="weight (g)",y="allometry (g/g/d)")
+  p <- p + ggplot2::labs(x="weight (g)",y="allometry (g/g/d)",
+                         subtitle="respiration and consumption")
   #print(p);
   plots[["respiration and consumption"]]<-p;
 
@@ -45,7 +49,8 @@ juvBioenergetics_PlotRelationships<-function(
   dfrp<-reshape2::melt(dfrCGT,id.vars="T",variable.name="type");
   p <- ggplot2::ggplot(data=dfrp,mapping=ggplot2::aes_string(x="T",y="value",colour="type"));
   p <- p + ggplot2::geom_line();
-  p <- p + ggplot2::labs(x="temperature",y="mass equivalent (g/d)")
+  p <- p + ggplot2::labs(x="temperature",y="mass equivalent (g/d)",
+                         subtitle="growth and consumption");
   #print(p);
   plots[["growth and consumption"]]<-p;
 
@@ -56,7 +61,8 @@ juvBioenergetics_PlotRelationships<-function(
   dfrp$T<-as.factor(dfrp$T)
   p <- ggplot2::ggplot(data=dfrp,mapping=ggplot2::aes_string(x="W",y="G",colour="T"));
   p <- p + ggplot2::geom_line();
-  #print(p);
+  p <- p + ggplot2::labs(x="weight",y="growth (J/g fish/d)",
+                         subtitle="growth at a fixed temperature");
   plots[["g(W|T)"]]<-p;
 
   #--plot growth as a function of temperature at different weights
@@ -64,17 +70,24 @@ juvBioenergetics_PlotRelationships<-function(
   dfrp$W<-as.factor(dfrp$W)
   p <- ggplot2::ggplot(data=dfrp,mapping=ggplot2::aes_string(x="T",y="G",colour="W"));
   p <- p + ggplot2::geom_line();
-  #print(p);
+  p <- p + ggplot2::labs(x="temperature",y="growth (J/g fish/d)",
+                         subtitle="growth at a fixed weight");
   plots[["g(T|W)"]]<-p;
 
   #--compare GT with G(w=6.8,T)
-  dfrGTw<-juv_BioEnGrowth(W=6.8,T)
-  dfrp$W<-as.factor(dfrp$W)
-  dfrp<-dfrGTw;
-  p <- ggplot2::ggplot(data=dfrp,mapping=ggplot2::aes_string(x="T",y="G",colour="W"));
+  dfrGTw<-juv_BioEnGrowth(W=6.8,T);
+  dfrGTw$W<-as.factor(dfrGTw$W);
+
+  dfrp<-cbind(dfrGTw,dfrCGT[,2:3]);
+  dfrp = reshape2::melt(dfrp,id.vars=c("W","T"),factorsAsStrings=TRUE);
+  dfrp$variable = as.character(dfrp$variable);
+  dfrp %<>% subset(variable %in% c("G","GT"))
+  dfrp$variable[dfrp$variable=="G"]  = "bioenergetics";
+  dfrp$variable[dfrp$variable=="GT"] = "empirical";
+  p <- ggplot2::ggplot(data=dfrp,mapping=ggplot2::aes_string(x="T",y="value",colour="variable"));
   p <- p + ggplot2::geom_line();
-  p <- p + ggplot2::geom_line(data=dfrCGT,mapping=ggplot2::aes_string(y="GT"),colour="black")
-  print(p);
+  p <- p + ggplot2::labs(x="temperature",y="G(T|W=6.8g) [J/g fish/day]",colour="calculation",
+                         subtitle="comparison of specific growth from \nbioenergetics and empirical equations");
   plots[["g(T|W=6.8g)"]]<-p;
 
   return(plots);
